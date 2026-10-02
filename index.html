@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guardian Fiber</title>
+<meta name="description" content="An exploratory innovation case for Avery Dennison's Digital Center of Excellence — from compliance to protection, one fiber, three horizons. By Pedro Andrade.">
+<meta property="og:title" content="Guardian Fiber">
+<meta property="og:description" content="From compliance to protection — one fiber, three horizons. An exploratory case for Avery Dennison's Digital Center of Excellence.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#10171C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%231E2A33'/%3E%3Cpath d='M50 16 L79 29 L79 54 Q79 78 50 89 Q21 78 21 54 L21 29 Z' fill='none' stroke='%235BC3E3' stroke-width='6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* Layout concept: a material passport — a stamped progress rail runs the length of the page and three numbered horizon "pages" sit at its center, like stamps in a travel document. */
+  :root{
+    --bg:#F2F5F6; --surface:#FFFFFF; --surface-2:#E3EAEC; --surface-dark:#10171C; --surface-dark-2:#1A242B;
+    --fg:#1E2A33; --muted:#596971; --line:rgba(30,42,51,.14);
+    --accent:#1C8FB0; --accent-soft:#D8EBF0;
+    --evidence:#2E7A5B; --evidence-soft:#DCEEE4;
+    --bet:#B3651D; --bet-soft:#F3E3CF;
+    --on-dark:#EEF3F4; --on-dark-muted:#9FB2BA;
+    --font-display:'Fraunces',ui-serif,Georgia,serif;
+    --font-body:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg:#10171C; --surface:#182229; --surface-2:#1E2A33; --surface-dark:#0A1013; --surface-dark-2:#141D23;
+      --fg:#EAF1F2; --muted:#92A4AC; --line:rgba(234,241,242,.14);
+      --accent:#5BC3E3; --accent-soft:#1B3038;
+      --evidence:#6BC79C; --evidence-soft:#17302A;
+      --bet:#E6A467; --bet-soft:#332416;
+      --on-dark:#EEF3F4; --on-dark-muted:#9FB2BA;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg:#10171C; --surface:#182229; --surface-2:#1E2A33; --surface-dark:#0A1013; --surface-dark-2:#141D23;
+    --fg:#EAF1F2; --muted:#92A4AC; --line:rgba(234,241,242,.14);
+    --accent:#5BC3E3; --accent-soft:#1B3038;
+    --evidence:#6BC79C; --evidence-soft:#17302A;
+    --bet:#E6A467; --bet-soft:#332416;
+    --on-dark:#EEF3F4; --on-dark-muted:#9FB2BA;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:var(--bg); color:var(--fg); font-family:var(--font-body);}
+  img{max-width:100%;}
+
+  .wrap{max-width:920px; margin:0 auto; padding-inline:20px;}
+
+  h1,h2,h3{font-family:var(--font-display); text-wrap:balance; margin:0;}
+  p{margin:0; line-height:1.55;}
+
+  .eyebrow{
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .badge{
+    display:inline-flex; align-items:center; gap:.4em;
+    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    padding:.32em .7em; border-radius:3px; font-weight:600;
+  }
+  .badge--public{ background:var(--evidence-soft); color:var(--evidence); }
+  .badge--bet{ background:var(--bet-soft); color:var(--bet); }
+  .badge::before{ content:"●"; font-size:.7em; }
+
+  #rail{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent); z-index:50; transition:width .08s linear; }
+  @media (prefers-reduced-motion: reduce){ #rail{ transition:none; } }
+
+  .hero{
+    padding-block:72px 56px; text-align:center;
+    background:
+      radial-gradient(640px 420px at 85% -10%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+      radial-gradient(520px 360px at 5% 110%, color-mix(in srgb, var(--evidence) 10%, transparent), transparent 70%);
+  }
+  .hero .eyebrow{ display:block; margin-bottom:22px; }
+  .hero h1{ font-size:clamp(2.1rem, 5.4vw, 3.6rem); font-weight:600; line-height:1.08; color:var(--fg); }
+  .hero .tagline{ margin-top:14px; font-size:.98rem; font-style:italic; color:var(--muted); }
+  .hero .role{
+    margin-top:28px; font-family:var(--font-mono); font-size:.95rem; font-weight:600; color:var(--accent);
+    letter-spacing:.02em;
+  }
+  .hero .byline{ margin-top:8px; font-size:.88rem; color:var(--muted); }
+
+  .stamp-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:44px; }
+  .stamp{
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+    border:1px solid var(--line); border-radius:999px; padding:.5em 1em;
+    color:var(--muted); background:var(--surface);
+  }
+  .stamp b{ color:var(--fg); font-weight:600; }
+
+  section{ padding-block:64px; border-top:1px solid var(--line); }
+  section.dark{ background:var(--surface-dark); color:var(--on-dark); border-top:1px solid transparent; }
+  section.dark .eyebrow{ color:var(--on-dark-muted); }
+  section.dark h2{ color:var(--on-dark); }
+
+  .section-head{ margin-bottom:34px; }
+  .section-head .eyebrow{ margin-bottom:10px; display:block; }
+  .section-head h2{ font-size:clamp(1.5rem, 3vw, 2.1rem); font-weight:600; }
+  .section-head .sub{ margin-top:10px; color:var(--muted); font-size:1rem; max-width:62ch; }
+  section.dark .section-head .sub{ color:var(--on-dark-muted); }
+
+  .grid{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); }
+  .grid-2{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); }
+
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:20px 22px; min-width:0; }
+  .card h3{ font-size:1.02rem; font-weight:600; margin-bottom:8px; color:var(--fg); }
+  .card p{ color:var(--muted); font-size:.92rem; }
+  .card--accent{ border-left:3px solid var(--accent); }
+  .card--evidence{ border-left:3px solid var(--evidence); }
+  .card--bet{ border-left:3px solid var(--bet); border-style:dashed; }
+
+  .pull{
+    background:var(--surface-dark-2); border-radius:12px; padding:28px 30px; margin-top:28px;
+    color:var(--on-dark); font-family:var(--font-display); font-size:1.15rem; font-style:italic; line-height:1.5;
+  }
+  .pull.light{ background:var(--surface-2); color:var(--fg); }
+
+  .horizon + .horizon{ margin-top:52px; padding-top:52px; border-top:1px dashed var(--line); }
+  .horizon-tag{ display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap; }
+  .horizon-num{
+    font-family:var(--font-mono); font-size:.8rem; color:var(--muted);
+    border:1px solid var(--line); border-radius:999px; width:2.1em; height:2.1em;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .horizon h3.title{ font-size:1.3rem; font-weight:600; }
+  .horizon .kicker{ font-family:var(--font-mono); font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+
+  .steps{ display:flex; flex-direction:column; gap:14px; }
+  .step{
+    background:var(--surface-dark-2); border:1px solid rgba(255,255,255,.08); border-radius:10px;
+    padding:20px 22px; display:grid; grid-template-columns:140px 1fr; gap:18px; align-items:start;
+  }
+  .step .label{ font-family:var(--font-mono); font-size:.78rem; color:var(--accent); letter-spacing:.03em; }
+  .step p{ color:var(--on-dark); font-size:.94rem; }
+  @media (max-width:560px){ .step{ grid-template-columns:1fr; gap:6px; } }
+
+  .bio-card{ background:var(--surface-2); border-radius:10px; padding:24px 26px; border-left:3px solid var(--muted); }
+  .bio-card p{ color:var(--fg); font-size:.96rem; }
+  .projects{ margin-top:20px; display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); }
+  .proj{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px 16px; min-width:0; }
+  .proj .name{ font-weight:600; font-size:.88rem; }
+  .proj .desc{ margin-top:3px; color:var(--muted); font-size:.8rem; }
+  .proj.self{ border-color:var(--accent); background:var(--accent-soft); }
+
+  .contact{ margin-top:34px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-family:var(--font-mono); font-size:.88rem; }
+  .copy-btn{
+    font-family:var(--font-mono); font-size:.8rem; border:1px solid var(--line); background:var(--surface);
+    color:var(--fg); border-radius:6px; padding:.5em .9em; cursor:pointer;
+  }
+  .copy-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .copy-btn:focus-visible, a:focus-visible, .proj:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  footer.page{ padding-block:36px; text-align:center; color:var(--muted); font-size:.78rem; font-family:var(--font-mono); }
+</style>
+</head>
+<body>
+
+<div id="rail"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Exploratory case · not affiliated with Avery Dennison</span>
+    <h1>Guardian Fiber</h1>
+    <p class="tagline">From compliance to protection — one fiber, three horizons.</p>
+    <p class="role">Innovation Lead · Digital Center of Excellence (DICE)</p>
+    <p class="byline">Reconstructed from public information only · Pedro Andrade</p>
+    <div class="stamp-row">
+      <span class="stamp">01 · <b>Guard the brand</b></span>
+      <span class="stamp">02 · <b>Guard the product</b></span>
+      <span class="stamp">03 · <b>Guard the wearer</b></span>
+    </div>
+  </div>
+</header>
+
+<section id="brief">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The brief</span>
+      <h2>What the role actually asks</h2>
+      <p class="sub">Innovation Lead, Digital Center of Excellence — individual contributor, matrixed teams.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Lead exploration across four domains</h3>
+        <p>Identify and explore new business and technology opportunities across Customer, Employee, Factory, and Product experience domains, with cross-functional teams.</p>
+      </div>
+      <div class="card">
+        <h3>Run workshops</h3>
+        <p>Facilitate exploration and "big idea" sessions with designers, architects, and business stakeholders to brainstorm and develop ideas.</p>
+      </div>
+      <div class="card">
+        <h3>Execute proofs of concept</h3>
+        <p>Lead POC execution using the DICE agile framework and Design Thinking methodologies, with internal and external partners.</p>
+      </div>
+      <div class="card">
+        <h3>Bridge vision and execution</h3>
+        <p>Translate technical concepts into actionable strategy — communicating clearly to every level of the organization, including executives.</p>
+      </div>
+    </div>
+    <div class="pull light">At first read, this looks like a mandate to build an innovation function from nothing.</div>
+  </div>
+</section>
+
+<section id="exists">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Starting point</span>
+      <h2>What already exists</h2>
+      <span class="badge badge--public">Public</span>
+    </div>
+    <div class="grid">
+      <div class="card card--evidence">
+        <h3>DICE: three existing programs</h3>
+        <p>Education builds digital fluency. Lab provides the POC methodology across the same four domains named in this posting. Outreach connects internal and external experts, universities, and suppliers.</p>
+      </div>
+      <div class="card card--evidence">
+        <h3>A disciplined pace, not a blank process</h3>
+        <p>One week maximum to validate a hypothesis. One month maximum for a proof of concept — a limit the CIO has publicly admitted the company once got wrong, letting POCs run for months.</p>
+      </div>
+      <div class="card card--evidence">
+        <h3>Decentralized by design</h3>
+        <p>Each business unit builds its own product and software capability. IT provides shared infrastructure, security, and a common architecture (iCore).</p>
+      </div>
+      <div class="card card--evidence">
+        <h3>A philosophy already in place</h3>
+        <p>"We don't want to build a lot of AI" — Nick Colisto, CIO. Commercial platforms over homegrown tools, humans in the loop, culture before tooling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="opportunity">
+  <div class="wrap">
+    <span class="eyebrow">Reframe</span>
+    <h2>The real opportunity isn't architecture</h2>
+    <p class="sub" style="margin-top:14px;">Five years of structure already exist. What's scarce is judgment about which bet to run next.</p>
+    <div class="pull">
+      "That judgment is best shown, not claimed."<br><br>
+      <span style="font-family:var(--font-body); font-style:normal; font-size:.95rem; color:var(--on-dark-muted);">
+      The rest of this case works through one real, dated, public pressure point the company already faces — all the way to a proof-of-concept plan written in the company's own process language.
+      </span>
+    </div>
+  </div>
+</section>
+
+<section id="trigger">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The trigger</span>
+      <h2>The real trigger: the Digital Product Passport</h2>
+      <span class="badge badge--public">Public</span>
+    </div>
+    <div class="grid">
+      <div class="card card--evidence">
+        <h3>A real regulation, a real date</h3>
+        <p>The EU's Digital Product Passport requirement begins in 2027, starting with two categories: batteries, and apparel and textiles.</p>
+      </div>
+      <div class="card">
+        <h3>Already on the roadmap</h3>
+        <p>atma.io, Avery Dennison's own connected-product platform, already markets a "DPP as a Service" offering. This is public positioning, not speculation.</p>
+      </div>
+      <div class="card card--accent" style="background:var(--surface-2);">
+        <h3>Why it matters now</h3>
+        <p>Apparel and textiles are already core Avery Dennison categories. This isn't a hypothetical new market — it's the one they already serve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="horizons">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Three horizons</span>
+      <h2>Where this could go, in order of certainty</h2>
+      <p class="sub">Each horizon guards something different — the brand's compliance, the product's authenticity, and the wearer's body — built on the same fiber.</p>
+    </div>
+
+    <div class="horizon">
+      <div class="horizon-tag">
+        <span class="horizon-num">01</span>
+        <div>
+          <div class="kicker">Compliance · the near-certain bet</div>
+          <h3 class="title">Horizon 1</h3>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card card--evidence">
+          <h3>What it is</h3>
+          <p>Use the RFID and label infrastructure Avery Dennison already sells, feeding atma.io, to get apparel and textile customers audit-ready before the 2027 deadline.</p>
+        </div>
+        <div class="card">
+          <h3>Why it goes first</h3>
+          <p>Lowest uncertainty of the three horizons: real regulation, real deadline, and an existing product already positioned for exactly this.</p>
+        </div>
+      </div>
+      <div class="pull">This horizon doesn't need invention — it needs execution before the clock runs out.</div>
+    </div>
+
+    <div class="horizon">
+      <div class="horizon-tag">
+        <span class="horizon-num">02</span>
+        <div>
+          <div class="kicker">Identity in the fiber · the proven bet</div>
+          <h3 class="title">Horizon 2</h3>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card card--evidence">
+          <h3>Proven once already</h3>
+          <p>Avery Dennison acquired TexTrace in 2022 specifically to integrate RFID at the yarn level — inside manufacturing, not added as a label afterward.</p>
+        </div>
+        <div class="card card--accent">
+          <h3>What it buys</h3>
+          <p>Higher-fidelity data for the same Digital Product Passport — and a manufacturing capability the company has already paid for and proven, not one to build from zero.</p>
+        </div>
+      </div>
+      <div class="pull">Horizon 2 doesn't ask "can we do this" — Avery Dennison already did, in 2022.</div>
+    </div>
+
+    <div class="horizon">
+      <div class="horizon-tag">
+        <span class="horizon-num">03</span>
+        <div>
+          <div class="kicker">Functional material · the exploratory bet</div>
+          <h3 class="title">Horizon 3</h3>
+        </div>
+      </div>
+      <span class="badge badge--bet" style="margin-bottom:18px; display:inline-flex;">Exploratory bet — lab-stage research</span>
+      <div class="grid-2">
+        <div class="card card--bet">
+          <h3>Thermoregulation</h3>
+          <p>Published 2026 research shows a passive dual-mode fabric that cools on one side (95% solar reflectivity) and heats on the other (up to 18.5°C rise) — no battery, no electronics.</p>
+        </div>
+        <div class="card card--bet">
+          <h3>Self-healing</h3>
+          <p>Published 2025 research shows ionic-gel polymer fiber that re-bonds under heat or pressure, recovering about 70% of original strength within an hour — already moving toward industrial partnership.</p>
+        </div>
+      </div>
+      <div class="pull">
+        <span style="color:var(--accent);">Avery Dennison already tried this ambition once.</span><br><br>
+        <span style="font-family:var(--font-body); font-style:normal; font-size:.95rem; color:var(--on-dark-muted);">
+        Between 2016 and 2019, its Janela platform aimed to connect 10 billion garments — identity only, nothing physical. The science to make the garment itself intelligent didn't exist then. Parts of it exist now.
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="execution">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Execution model</span>
+      <h2>Speaking the process they already have</h2>
+      <p class="sub">Applying DICE's own stage-gate to Horizon 1.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="label">Week 1 — hypothesis</span>
+        <p>Validate, with two or three real apparel customers already using Avery Dennison RFID, whether DPP compliance is an active 2026–2027 budget conversation.</p>
+      </div>
+      <div class="step">
+        <span class="label">Weeks 2–5 — proof of concept</span>
+        <p>A working DPP record for one SKU, end to end: label → atma.io record → QR-accessible passport — inside the one-month limit DICE already holds itself to.</p>
+      </div>
+      <div class="step">
+        <span class="label">What this demonstrates</span>
+        <p>Not a new framework proposed from outside — fluency inside the one that already exists.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="honesty">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Scope honesty</span>
+      <h2>What's real, and what's a bet</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card card--evidence" style="background:var(--surface-2);">
+        <h3>What's real</h3>
+        <p>DICE's structure, its three programs, the four domains, the POC discipline, atma.io, TexTrace, and the 2027 DPP deadline — all public and independently verifiable.</p>
+      </div>
+      <div class="card card--bet">
+        <h3>What's a bet</h3>
+        <p>That Horizon 3's materials are the right next bet for this specific company, and that this exact sequencing is how DICE would choose to prioritize it — that's judgment, not fact.</p>
+      </div>
+    </div>
+    <div class="pull">This case doesn't arrive at a closed answer — it arrives at someone capable of reaching one with real information.</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">About</span>
+      <h2>Pedro Andrade</h2>
+    </div>
+    <div class="bio-card">
+      <p>Product Strategy and Service Design professional applying systems thinking to complex business challenges. Formerly Product Manager at Natura &amp;Co, where he created NaMão and later worked on the core strategy of the company's direct-sales app, serving over 7.5 million consultants across Latin America. Recently led the sale of market4u, his own retail venture, and is now evaluating new opportunities in Product Strategy and Service Design.</p>
+    </div>
+    <div class="projects">
+      <div class="proj self"><div class="name">NaMão</div><div class="desc">Inventory and business management for direct-sales consultants</div></div>
+      <div class="proj"><div class="name">InsideOut (iClinic)</div><div class="desc">Governance and mandate in a fragmented ecosystem</div></div>
+      <div class="proj"><div class="name">Kaiza</div><div class="desc">Forward-buying through consumption prediction</div></div>
+      <div class="proj"><div class="name">TRAMA</div><div class="desc">The relationships behind a resume</div></div>
+      <div class="proj"><div class="name">H2I</div><div class="desc">Open healthcare for the end user</div></div>
+      <div class="proj"><div class="name">Bee2win</div><div class="desc">Regenerative ecosystem + credit</div></div>
+      <div class="proj"><div class="name">Turbi (T-box)</div><div class="desc">Mobility data across 3 horizons</div></div>
+      <div class="proj"><div class="name">Cobli</div><div class="desc">Reliability of the base before new features</div></div>
+      <div class="proj"><div class="name">Reclame Aqui (RAI-D)</div><div class="desc">Continuous diagnosis through complaints</div></div>
+      <div class="proj"><div class="name">Stone (S.Elo)</div><div class="desc">Commercial bridge between B2B customers</div></div>
+      <div class="proj"><div class="name">LiderHub (Habeas Churn)</div><div class="desc">Niche before support</div></div>
+    </div>
+    <div class="contact">
+      <span id="email-text">pedro.camargo.peruzim.andrade@gmail.com</span>
+      <button class="copy-btn" id="copy-email" type="button">Copy email</button>
+    </div>
+  </div>
+</section>
+
+<footer class="page">
+  Exploratory case · not affiliated with Avery Dennison · full deck available in the Projects section of my LinkedIn profile
+</footer>
+
+<script>
+(function(){
+  try{
+    var rail = document.getElementById('rail');
+    function onScroll(){
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      rail.style.width = pct + '%';
+    }
+    document.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+  }catch(e){}
+
+  try{
+    var btn = document.getElementById('copy-email');
+    var txt = document.getElementById('email-text').textContent;
+    btn.addEventListener('click', function(){
+      function fallback(){
+        try{
+          var range = document.createRange();
+          range.selectNodeContents(document.getElementById('email-text'));
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }catch(e){}
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = 'Copy email'; }, 1800);
+        }).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
